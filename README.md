@@ -1,57 +1,128 @@
-# Project Name
+---
+page_type: sample
+description: An Azure Maps Web SDK module that provides a control that displays an overview map of the area the main map is focused on.
+languages:
+- javascript
+- typescript
+products:
+- azure
+- azure-maps
+---
 
-(short, 1-3 sentenced, description of the project)
+# Azure Maps Overview Map module
 
-## Features
+An Azure Maps Web SDK module that provides a control that displays an overview map of the area the main map is focused on. This is also often known as a mini-map.
 
-This project framework provides the following features:
+**Samples**
 
-* Feature 1
-* Feature 2
-* ...
+[Mini Overview Map](https://azuremapscodesamples.azurewebsites.net/index.html?sample=Mini%20overview%20Map)
+<br/>[<img src="https://github.com/Azure-Samples/AzureMapsCodeSamples/raw/master/AzureMapsCodeSamples/SiteResources/screenshots/Mini-overview-Map.jpg" height="200px">](https://azuremapscodesamples.azurewebsites.net/index.html?sample=Mini%20overview%20Map)
 
-## Getting Started
+[Mini overview map options](https://azuremapscodesamples.azurewebsites.net/index.html?sample=Mini%20overview%20map%20options)
+<br/>[<img src="https://github.com/Azure-Samples/AzureMapsCodeSamples/raw/master/AzureMapsCodeSamples/SiteResources/screenshots/Mini-overview-map-options.jpg" height="200px">](https://azuremapscodesamples.azurewebsites.net/index.html?sample=Mini%20overview%20map%20options)
 
-### Prerequisites
+## Getting started
 
-(ideally very short, if any)
+Download the project and copy the `azure-maps-overview-map` JavaScript file from the `dist` folder into your project. 
 
-- OS
-- Library version
-- ...
+**Usage**
 
-### Installation
+```JavaScript
+//Add the overview map control to the map.
+map.controls.add(new atlas.control.OverviewMap(), {
+    position: 'top-left'
+});
+```
 
-(ideally very short)
+## API Reference
 
-- npm install [package name]
-- mvn install
-- ...
+### OverviewMap class
 
-### Quickstart
-(Add steps to get up and running quickly)
+Implements: `atlas.Control`
 
-1. git clone [repository clone url]
-2. cd [respository name]
-3. ...
+Namespace: `atlas.control`
 
+A control that displays an overview map of the area the main map is focused on.
 
-## Demo
+**Contstructor**
 
-A demo app is included to show how to use the project.
+> `OverviewMap(options?: OverviewMapOptions)`
 
-To run the demo, follow these steps:
+**Methods**
 
-(Add steps to start up the demo)
+| Name | Return type | Description |
+|------|------|-------------|
+| `dispose()` | | Dispose the overview map control and clean up its resources. |
+| `getOverviewMap()` | `atlas.Map` | Get the overview map instance. Use this to get the map and customize its settings. |
+| `getLayers()` | `OverviewMapLayers` | Get the underlying layers used to render the overview area on the map. |
+| `getOptions()` | `OverviewMapOptions` | Get the options for the overview map control. |
+| `setOptions(options: OverviewMapOptions)` | | Set the options for the overview map control. |
 
-1.
-2.
-3.
+### OverviewMapOptions interface
 
-## Resources
+Options for the `OverviewMap` control.
 
-(Any additional resources or related projects)
+**Properties** 
 
-- Link to supporting information
-- Link to similar sample
-- ...
+| Name | Type | Description |
+|------|------|-------------|
+| `height` | `number` | The height of the overview map in pixels. Default: `150` |
+| `interactive` | `boolean` | Specifies if the overview map is interactive. Default: `true` |
+| `mapStyle` | `string` | The name of the style to use when rendering the map. Available styles can be found in the [supported styles][https://docs.microsoft.com/azure/azure-maps/supported-map-styles) article. Default: `road` |
+| `markerOptions` | `atlas.HtmlMarkerOptions` | Options for customizing the marker overlay. If the draggable option of the marker it enabled, the map will center over the marker location after it has been dragged to a new location. |
+| `minimized` | `boolean` | Specifies if the overview map is minimized or not. Default: `false` |
+| `overlay` | `'area'` \| `'marker'` \| `'none'` | Specifies the type of information to overlay on top of the map.<br/><br/> - area: shows a polygon area of the parent map view port.<br/> - marker: shows a marker for the center of the parent map.<br/> - none: does not display any overlay on top of the overview map.<br/><br/>Default: `'area'` |
+| `showToggle` | `boolean` | Specifies if a toggle button for mininizing the overview map should be displayed or not. Default: `true` |
+| `style` | `atlas.ControlStyle` \| `string` | The style of the control. Can be; light, dark, auto, or any CSS3 color. When set to auto, the style will change based on the map style. Default `light` |
+| `syncBearingPitch` | `boolean` | Specifies if bearing and pitch changes should be synchronized. Default: `true` |
+| `syncZoom` | `boolean` | Specifies if zoom level changes should be synchronized. Default: `true` |
+| `visible` | `boolean` | Specifies if the overview map control is visible or not. Default: `true` |
+| `width` | `number` | The width of the overview map in pixels. Default: `150` |
+| `zoom` | `number` | Zoom level to set on overview map when not synchronizing zoom level changes. Default: `1` |
+| `zoomOffset` | `number` | The number of zoom levels to offset from the parent map zoom level when synchronizing zoom level changes. Default: `-5` |
+
+### OverviewMapLayers interface
+
+Layers used in an overview map to render the parent maps viewport area as a polygon. 
+
+**Properties** 
+
+| Name | Type | Description |
+|------|------|-------------|
+| `lineLayer` | `atlas.layer.LineLayer` | Layer that renders the outline of the parent maps viewport. |
+| `polygonLayer` | `atlas.layer.PolygonLayer` | Layer that renders the area of the parent maps viewport. |
+
+## Related Projects
+
+* [Azure Maps Web SDK Open modules](https://github.com/microsoft/Maps/blob/master/AzureMaps.md#open-web-sdk-modules) - A collection of open source modules that extend the Azure Maps Web SDK.
+* [Azure Maps Web SDK Samples](https://github.com/Azure-Samples/AzureMapsCodeSamples)
+* [Azure Maps Gov Cloud Web SDK Samples](https://github.com/Azure-Samples/AzureMapsGovCloudCodeSamples)
+* [Azure Maps & Azure Active Directory Samples](https://github.com/Azure-Samples/Azure-Maps-AzureAD-Samples)
+* [List of open-source Azure Maps projects](https://github.com/microsoft/Maps/blob/master/AzureMaps.md)
+
+## Additional Resources
+
+* [Azure Maps (main site)](https://azure.com/maps)
+* [Azure Maps Documentation](https://docs.microsoft.com/azure/azure-maps/index)
+* [Azure Maps Blog](https://azure.microsoft.com/blog/topics/azure-maps/)
+* [Microsoft Q&A](https://docs.microsoft.com/answers/topics/azure-maps.html)
+* [Azure Maps feedback](https://feedback.azure.com/forums/909172-azure-maps)
+
+## Contributing
+
+We welcome contributions. Feel free to submit code samples, file issues and pull requests on the repo and we'll address them as we can. 
+Learn more about how you can help on our [Contribution Rules & Guidelines](https://github.com/Azure-Samples/azure-maps-overview-map/blob/main/CONTRIBUTING.md). 
+
+You can reach out to us anytime with questions and suggestions using our communities below:
+* [Microsoft Q&A](https://docs.microsoft.com/answers/topics/azure-maps.html)
+* [Azure Maps feedback](https://feedback.azure.com/forums/909172-azure-maps)
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). 
+For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or 
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## License
+
+MIT
+ 
+See [License](https://github.com/Azure-Samples/azure-maps-overview-map/blob/main/LICENSE.md) for full license text.
