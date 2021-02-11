@@ -1,6 +1,6 @@
 {
   "name": "azure-maps-overview-map",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An Azure Maps Web SDK module that provides a control that displays an overview map of the area the main map is focused on.",
   "keywords": [
     "azure",

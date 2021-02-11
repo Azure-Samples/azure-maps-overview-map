@@ -38,7 +38,8 @@ export class OverviewMap implements azmaps.Control {
         minimized: false,
         showToggle: true,
         visible: true,
-        markerOptions: {}
+        markerOptions: {},
+        shape: 'square'
     };
 
     private _source = new azmaps.source.DataSource();
@@ -58,7 +59,8 @@ export class OverviewMap implements azmaps.Control {
     private _btnCss = ".azmaps-overviewMap{z-index:200;padding:5px;box-shadow:0px 0px 4px rgba(0,0,0,0.5);border:none;border-collapse:collapse;border-radius:5px;transition:width 0.5s ease-in-out 0s, height 0.5s ease-in-out 0s;background:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32px' height='32px' viewBox='0 0 500 500'%3E%3Cpath stroke='Gray' fill='none' stroke-width='20' d='M249,55a195,195 0 1,0 2,0zm1,0v390m195-195H55 M99,130a260,260 0 0,0 302,0 m0,240 a260,260 0 0,0-302,0 M235,60a250,250 0 0,0 0,382 m30,0 a250,250 0 0,0 0-382'/%3E%3C/svg%3E\") no-repeat center center}" +
         '.azmaps-overviewMapDiv{position:relative;height:100%;width:100%;transition:opacity 0.5s ease-in-out 0s}' +
         '.azmaps-overviewMapBtn{position:absolute;margin:0;padding:0;border:none;border-collapse:collapse;width:22px;height:22px;text-align:center;cursor:pointer;line-height:32px;border-radius:5px;z-index:200;background:no-repeat center center;background-image:{icon};background-size:12px;transition:transform 0.5s ease-in-out 0s}' +
-        '.azmaps-overviewMapBtn:hover{background-image:{iconHover}}';
+        '.azmaps-overviewMapBtn:hover{background-image:{iconHover}}' + 
+        '.azmaps-overviewMap-round{border-radius:50%}.azmaps-overviewMap-round canvas{border-radius:50%}';
 
     private _btnRotation = 0;
 
@@ -243,6 +245,17 @@ export class OverviewMap implements azmaps.Control {
             }
         }
 
+        if(options.shape){
+            opt.shape = options.shape;
+            const mcCl = self._mapContainer.classList;
+
+            if(opt.shape === 'round'){
+                mcCl.add('azmaps-overviewMap-round');  
+            } else if(mcCl.contains('azmaps-overviewMap-round')) {
+                mcCl.remove('azmaps-overviewMap-round');
+            }
+        }
+
         if (typeof options.visible === 'boolean') {
             opt.visible = options.visible;
             if (self._container) {
@@ -287,6 +300,11 @@ export class OverviewMap implements azmaps.Control {
 
         const mapContainer = document.createElement('div');
         mapContainer.classList.add('azmaps-overviewMap');
+
+        if(opt.style === 'round'){
+            mapContainer.classList.add('azmaps-overviewMap-round');           
+        }
+
         Object.assign(mapContainer.style, {
             height: opt.height + 'px',
             width: opt.width + 'px',

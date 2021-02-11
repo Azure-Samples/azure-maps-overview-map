@@ -108,7 +108,7 @@ declare namespace atlas {
         /** Specifies if the overview map is minimized or not. Default: `false` */
         minimized?: boolean;
 
-        /** Specifies if a toggle button for mininizing the overview map should be displayed or not. Default: `true` */
+        /** Specifies if a toggle button for minimizing the overview map should be displayed or not. Default: `true` */
         showToggle?: boolean;
 
         /** 
@@ -125,6 +125,9 @@ declare namespace atlas {
          * If the draggable option of the marker it enabled, the map will center over the marker location after it has been dragged to a new location.
          */
         markerOptions?: azmaps.HtmlMarkerOptions;
+
+        /** Specifies the shape of the overview map. Default: `'square`' */
+        shape?: 'square' | 'round';
 
         /** Specifies if the overview map control is visible or not. Default: `true` */
         visible?: boolean;

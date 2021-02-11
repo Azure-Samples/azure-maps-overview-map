@@ -16,7 +16,7 @@
     <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
 
     <!-- Add reference to the overview map control module. -->
-    <script src="../dist/azure-maps-overview-map.js"></script>
+    <script src="../dist/azure-maps-overview-map.min.js"></script>
 
     <script type='text/javascript'>
         var map, overviewMap;
@@ -181,7 +181,16 @@
                         <option selected="selected">light</option>
                     </select>
                 </td>
-            </tr>         
+            </tr>  
+            <tr title="Specifies the shape of the overview map.">
+                <td>Shape:</td>
+                <td>
+                    <select onchange="selectUpdated(this, 'shape')">
+                        <option selected="selected">square</option>
+                        <option>round</option>
+                    </select>
+                </td>
+            </tr>       
             <tr title="Specifies if zoom level changes should be synchronized.">
                 <td>Sync zoom:</td>
                 <td><input type="checkbox" onclick="setSyncZoom(this)" checked="checked" /></td>

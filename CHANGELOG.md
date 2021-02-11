@@ -1,5 +1,12 @@
 ## azure-maps-overview-map Changelog
 
+<a name="0.0.2"></a>
+# 0.0.1 (2021-02-11)
+
+**Features**
+
+- Added shape option (square/round)
+ 
 <a name="0.0.1"></a>
 # 0.0.1 (2020-08-21)
 
@@ -7,4 +14,3 @@
 
 - Control for getting the users position.
 - Ability to track the users position.
-
