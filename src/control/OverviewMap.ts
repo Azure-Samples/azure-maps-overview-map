@@ -45,12 +45,10 @@ export class OverviewMap implements azmaps.Control {
     private _source = new azmaps.source.DataSource();
     private _layers: OverviewMapLayers = {
         lineLayer: new azmaps.layer.LineLayer(this._source, null, {
-            fillColor: 'orange',
             filter: ['get', 'visible']
         }),
 
         polygonLayer: new azmaps.layer.PolygonLayer(this._source, null, {
-            strokeColor: 'orange',
             filter: ['get', 'visible']
         })
     };
