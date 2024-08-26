@@ -375,24 +375,6 @@ MIT License
                 position = 'top-left';
             }
             self._position = position;
-            /*const isLeft = position.indexOf('left') > -1;
-            const isTop = position.indexOf('top') > -1;
-
-            if (isTop) {
-                btnStyle.bottom = '0';
-                rotation = isLeft ? 180 : 270;
-            } else {
-                btnStyle.top = '0';
-                rotation = isLeft ? 90 : 0;
-            }
-
-            if (isLeft) {
-                btnStyle.right = '0';
-            } else {
-                btnStyle.left = '0';
-            }
-
-            btnStyle.transform = `rotate(${rotation}deg)`;*/
             var btn = document.createElement("button");
             btn.setAttribute('type', 'button');
             btn.classList.add('azmaps-overviewMapBtn');
