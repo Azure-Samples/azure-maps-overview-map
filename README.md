@@ -72,6 +72,7 @@ Options for the `OverviewMap` control.
 | `markerOptions` | `atlas.HtmlMarkerOptions` | Options for customizing the marker overlay. If the draggable option of the marker it enabled, the map will center over the marker location after it has been dragged to a new location. |
 | `minimized` | `boolean` | Specifies if the overview map is minimized or not. Default: `false` |
 | `overlay` | `'area'` \| `'marker'` \| `'none'` | Specifies the type of information to overlay on top of the map.<br/><br/> - area: shows a polygon area of the parent map view port.<br/> - marker: shows a marker for the center of the parent map.<br/> - none: does not display any overlay on top of the overview map.<br/><br/>Default: `'area'` |
+| `shape` | `square` \| `round` | Specifies the shape of the overview map. Default: `'square`' |
 | `showToggle` | `boolean` | Specifies if a toggle button for minimizing the overview map should be displayed or not. Default: `true` |
 | `style` | `atlas.ControlStyle` \| `string` | The style of the control. Can be; light, dark, auto, or any CSS3 color. When set to auto, the style will change based on the map style. Default `light` |
 | `syncBearingPitch` | `boolean` | Specifies if bearing and pitch changes should be synchronized. Default: `true` |
