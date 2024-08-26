@@ -320,8 +320,7 @@ export class OverviewMap implements azmaps.Control {
             display: opt.showToggle ? '' : 'none',
             backgroundColor: color
         };
-        let rotation = 90;
-
+        
         let position: azmaps.ControlPosition;
         if (options) {
             position = options.position;
@@ -556,7 +555,6 @@ export class OverviewMap implements azmaps.Control {
         let opacity = '0';
         let r = 0;
         let resx = self._resx[2];
-
         const isLeft = self._position.indexOf('left') > -1;
         const isTop = self._position.indexOf('top') > -1;
 
