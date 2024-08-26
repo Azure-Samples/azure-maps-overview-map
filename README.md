@@ -15,11 +15,11 @@ An Azure Maps Web SDK module that provides a control that displays an overview m
 
 **Samples**
 
-[Mini Overview Map](https://azuremapscodesamples.azurewebsites.net/index.html?sample=Mini%20overview%20Map)
-<br/>[<img src="https://github.com/Azure-Samples/AzureMapsCodeSamples/raw/master/AzureMapsCodeSamples/SiteResources/screenshots/Mini-Overview-Map.jpg" height="200px">](https://azuremapscodesamples.azurewebsites.net/index.html?sample=Mini%20overview%20Map)
+[Mini Overview Map](https://samples.azuremaps.com/?sample=mini-overview-map)
+<br/>[<img src="https://samples.azuremaps.com/map/mini-overview-map/screenshot.jpg" height="200px">](https://samples.azuremaps.com/?sample=mini-overview-map)
 
-[Mini overview map options](https://azuremapscodesamples.azurewebsites.net/index.html?sample=Mini%20overview%20map%20options)
-<br/>[<img src="https://github.com/Azure-Samples/AzureMapsCodeSamples/raw/master/AzureMapsCodeSamples/SiteResources/screenshots/Mini-overview-map-options.jpg" height="200px">](https://azuremapscodesamples.azurewebsites.net/index.html?sample=Mini%20overview%20map%20options)
+[Mini overview map options](https://samples.azuremaps.com/?sample=mini-overview-map-options)
+<br/>[<img src="https://samples.azuremaps.com/map/mini-overview-map-options/screenshot.jpg" height="200px">](https://samples.azuremaps.com/?sample=mini-overview-map-options)
 
 ## Getting started
 
