@@ -14,6 +14,7 @@ export class OverviewMap implements azmaps.Control {
     private _btn: HTMLButtonElement;
     private _darkColor = '#011c2c';
     private _hclStyle: azmaps.ControlStyle = null;
+    private _position: azmaps.ControlPosition = <azmaps.ControlPosition>'non-fixed';
 
     //Parent map.
     private _parentMap: azmaps.Map;
@@ -73,9 +74,7 @@ export class OverviewMap implements azmaps.Control {
      * @param options Options for defining how the control is rendered and functions.
      */
     constructor(options?: OverviewMapOptions) {
-        if (options) {
-            this.setOptions(options);
-        }
+        Object.assign(this._options, options || {});
     }
 
     /****************************
@@ -203,10 +202,6 @@ export class OverviewMap implements azmaps.Control {
             btnState = true;
         }
 
-        if (btnState) {
-            self._setBtnState();
-        }
-
         if (options.markerOptions) {
             Object.assign(opt.markerOptions, options.markerOptions);
 
@@ -252,6 +247,7 @@ export class OverviewMap implements azmaps.Control {
             } else if(mcCl.contains('azmaps-overviewMap-round')) {
                 mcCl.remove('azmaps-overviewMap-round');
             }
+            btnState = true;
         }
 
         if (typeof options.visible === 'boolean') {
@@ -261,8 +257,10 @@ export class OverviewMap implements azmaps.Control {
                 self._overviewMap.resize();
             }
         }
-
-        //hideWhenMapSmall
+        
+        if (btnState) {
+            self._setBtnState();
+        }
     }
 
     /**
@@ -324,7 +322,7 @@ export class OverviewMap implements azmaps.Control {
         };
         let rotation = 90;
 
-        let position: string;
+        let position: azmaps.ControlPosition;
         if (options) {
             position = options.position;
         }
@@ -333,7 +331,9 @@ export class OverviewMap implements azmaps.Control {
             position = <azmaps.ControlPosition>'top-left';
         }
 
-        const isLeft = position.indexOf('left') > -1;
+        self._position = position;
+
+        /*const isLeft = position.indexOf('left') > -1;
         const isTop = position.indexOf('top') > -1;
 
         if (isTop) {
@@ -350,8 +350,7 @@ export class OverviewMap implements azmaps.Control {
             btnStyle.left = '0';
         }
 
-        btnStyle.transform = `rotate(${rotation}deg)`;
-        self._btnRotation = rotation;
+        btnStyle.transform = `rotate(${rotation}deg)`;*/
 
         const btn = document.createElement("button");
         btn.setAttribute('type', 'button');
@@ -574,8 +573,25 @@ export class OverviewMap implements azmaps.Control {
         let w = '26px';
         let h = '26px';
         let opacity = '0';
-        let r = self._btnRotation;
+        let r = 0;
         let resx = self._resx[2];
+
+        const isLeft = self._position.indexOf('left') > -1;
+        const isTop = self._position.indexOf('top') > -1;
+
+        if (isTop) {
+            btn.style.bottom = '0';
+            r = isLeft ? 180 : 270;
+        } else {
+            btn.style.top = '0';
+            r = isLeft ? 90 : 0;
+        }
+
+        if (isLeft) {
+            btn.style.right = '0';
+        } else {
+            btn.style.left = '0';
+        }
 
         if (opt.minimized) {
             r = (r + 180) % 360;
@@ -584,6 +600,26 @@ export class OverviewMap implements azmaps.Control {
             opacity = '1';
             h = opt.height + 'px';
             w = opt.width + 'px';
+
+            if (opt.shape === 'round') {
+                var x = opt.width / 2;
+                var y = opt.height / 2;
+                var angle = Math.cos(45 * Math.PI / 180);
+                let radiusXOffset = x - x * angle - 10;                
+                let radiusYOffset = y - y * angle - 10;
+
+                if (isTop) {
+                    btn.style.bottom = radiusYOffset + 'px';
+                } else {
+                    btn.style.top = radiusYOffset + 'px';
+                }
+        
+                if (isLeft) {
+                    btn.style.right = radiusXOffset + 'px';
+                } else {
+                    btn.style.left = radiusXOffset + 'px';
+                }
+            }
         }
 
         if (self._mapContainer) {

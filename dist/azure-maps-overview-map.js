@@ -89,6 +89,7 @@ MIT License
             var _this = this;
             this._darkColor = '#011c2c';
             this._hclStyle = null;
+            this._position = 'non-fixed';
             this._syncEvents = [];
             this._options = {
                 style: 'light',
@@ -110,11 +111,9 @@ MIT License
             this._source = new azmaps.source.DataSource();
             this._layers = {
                 lineLayer: new azmaps.layer.LineLayer(this._source, null, {
-                    fillColor: 'orange',
                     filter: ['get', 'visible']
                 }),
                 polygonLayer: new azmaps.layer.PolygonLayer(this._source, null, {
-                    strokeColor: 'orange',
                     filter: ['get', 'visible']
                 })
             };
@@ -165,9 +164,7 @@ MIT License
                     self._interval = null;
                 }
             };
-            if (options) {
-                this.setOptions(options);
-            }
+            Object.assign(this._options, options || {});
         }
         /****************************
          * Public Methods
@@ -271,9 +268,6 @@ MIT License
                 opt.height = options.height;
                 btnState = true;
             }
-            if (btnState) {
-                self._setBtnState();
-            }
             if (options.markerOptions) {
                 Object.assign(opt.markerOptions, options.markerOptions);
                 if (self._marker) {
@@ -312,6 +306,7 @@ MIT License
                 else if (mcCl.contains('azmaps-overviewMap-round')) {
                     mcCl.remove('azmaps-overviewMap-round');
                 }
+                btnState = true;
             }
             if (typeof options.visible === 'boolean') {
                 opt.visible = options.visible;
@@ -320,7 +315,9 @@ MIT License
                     self._overviewMap.resize();
                 }
             }
-            //hideWhenMapSmall
+            if (btnState) {
+                self._setBtnState();
+            }
         };
         /**
          * Action to perform when the control is added to the map.
@@ -370,7 +367,6 @@ MIT License
                 display: opt.showToggle ? '' : 'none',
                 backgroundColor: color
             };
-            var rotation = 90;
             var position;
             if (options) {
                 position = options.position;
@@ -378,24 +374,25 @@ MIT License
             if (!position || position === 'non-fixed') {
                 position = 'top-left';
             }
-            var isLeft = position.indexOf('left') > -1;
-            var isTop = position.indexOf('top') > -1;
+            self._position = position;
+            /*const isLeft = position.indexOf('left') > -1;
+            const isTop = position.indexOf('top') > -1;
+
             if (isTop) {
                 btnStyle.bottom = '0';
                 rotation = isLeft ? 180 : 270;
-            }
-            else {
+            } else {
                 btnStyle.top = '0';
                 rotation = isLeft ? 90 : 0;
             }
+
             if (isLeft) {
                 btnStyle.right = '0';
-            }
-            else {
+            } else {
                 btnStyle.left = '0';
             }
-            btnStyle.transform = "rotate(" + rotation + "deg)";
-            self._btnRotation = rotation;
+
+            btnStyle.transform = `rotate(${rotation}deg)`;*/
             var btn = document.createElement("button");
             btn.setAttribute('type', 'button');
             btn.classList.add('azmaps-overviewMapBtn');
@@ -556,8 +553,24 @@ MIT License
             var w = '26px';
             var h = '26px';
             var opacity = '0';
-            var r = self._btnRotation;
+            var r = 0;
             var resx = self._resx[2];
+            var isLeft = self._position.indexOf('left') > -1;
+            var isTop = self._position.indexOf('top') > -1;
+            if (isTop) {
+                btn.style.bottom = '0';
+                r = isLeft ? 180 : 270;
+            }
+            else {
+                btn.style.top = '0';
+                r = isLeft ? 90 : 0;
+            }
+            if (isLeft) {
+                btn.style.right = '0';
+            }
+            else {
+                btn.style.left = '0';
+            }
             if (opt.minimized) {
                 r = (r + 180) % 360;
                 resx = self._resx[1];
@@ -566,6 +579,25 @@ MIT License
                 opacity = '1';
                 h = opt.height + 'px';
                 w = opt.width + 'px';
+                if (opt.shape === 'round') {
+                    var x = opt.width / 2;
+                    var y = opt.height / 2;
+                    var angle = Math.cos(45 * Math.PI / 180);
+                    var radiusXOffset = x - x * angle - 10;
+                    var radiusYOffset = y - y * angle - 10;
+                    if (isTop) {
+                        btn.style.bottom = radiusYOffset + 'px';
+                    }
+                    else {
+                        btn.style.top = radiusYOffset + 'px';
+                    }
+                    if (isLeft) {
+                        btn.style.right = radiusXOffset + 'px';
+                    }
+                    else {
+                        btn.style.left = radiusXOffset + 'px';
+                    }
+                }
             }
             if (self._mapContainer) {
                 self._mapDiv.style.opacity = opacity;
